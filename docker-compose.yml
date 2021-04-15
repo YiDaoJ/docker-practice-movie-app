@@ -8,6 +8,9 @@ services:
       - '3000:3000'
     networks:
       - mern-app
+    volumes:
+      - ./client/:/usr/src/app
+      - /usr/src/app/node-modules
   api-server:
     image: api-server
     build: ./server/
@@ -18,7 +21,8 @@ services:
     depends_on:
       - mongo
     volumes:
-      - ./client/:/usr/src/app
+      - ./server/:/usr/src/app
+      - /usr/src/app/node-modules
 
   mongo:
     image: mongo:4.4-bionic
